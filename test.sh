@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+THISDIR=$(dirname $0)
+FILE=$1
+if [ -z "$FILE" ]; then
+  echo "usage: $0 file-in-some-other-dir" >&2
+  exit 2
+fi
+
+echo "Original file size: $(stat -f '%z' "$FILE") bytes"
+echo "Transferring:"
+PATH=$THISDIR:$PATH join "send $FILE|pv -b" receive
+diff -q "$FILE" "$(basename $FILE)" && echo "Files identical"
