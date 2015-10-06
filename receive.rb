@@ -9,11 +9,12 @@ while true
 
   case request[:type]
   when SendType::FINDDIGEST
-    seek_to = request[:start]
     windowsize = request[:length]
     new_digest = request[:digest]
 
-    # search through entire file for block
+    # Search through ENTIRE file for block
+    seek_to = 0
+    fin.seek(seek_to)
     block = fin.read(windowsize)
     while block
       old_digest = Digest::MD5.digest(block)
@@ -28,18 +29,16 @@ while true
     if new_digest == old_digest
       STDERR.write("Found it! #{seek_to}\n")
       response = SendResponse.found_block_response(seek_to)
+      # write out the block
     else
       response = SendResponse.not_found_block_response
+      # receive and write a single byte now
     end
+  when SendType::WRITEDATA
   when SendType::FINISHED
     break
   end
 
   STDOUT.write(response)
   STDOUT.flush
-
-  #fout.write(someinput)
-  #numbytes = STDOUT.write('readeded')
-  #STDOUT.flush
-  #someinput = STDIN.read(WINDOWSIZE)
 end
