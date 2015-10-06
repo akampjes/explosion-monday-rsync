@@ -49,5 +49,9 @@ while true
   #someinput = fin.read(WINDOWSIZE)
 end
 
+request = SendRequest.finished
+STDOUT.write(request)
+STDOUT.flush
+
 #fin.close
 

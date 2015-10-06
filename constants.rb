@@ -3,7 +3,7 @@ WINDOWSIZE=8
 module SendType
   FINDDIGEST = 0
   HELLO = 1
-  OLLEH = 2
+  FINISHED = 2
   WRITEBLOCK = 3
   WRITEDATA = 4
 end
@@ -38,6 +38,12 @@ class SendRequest
 
   def self.hello(filename)
     data = {type: SendType::HELLO}
+
+    generate_request(data)
+  end
+
+  def self.finished
+    data = {type: SendType::FINISHED}
 
     generate_request(data)
   end
