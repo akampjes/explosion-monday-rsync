@@ -1,4 +1,4 @@
-WINDOWSIZE=8
+WINDOWSIZE=1024
 
 module SendType
   FINDDIGEST = 0
