@@ -1,0 +1,13 @@
+* don't need to send seek_to to receive.rb because it needs to look through the entire file anyway
+  * don't really need the block size either if it's just going to be static
+* write block if it's found obvs
+* write the missing data diff after stashing it up
+
+* handle end of file buffer size issue
+
+* fix test.sh so that it works with my code
+* create my own test files and harnessing
+
+* write to a seperate file and then just rename it over at the end
+
+* packing packets with types properly
